@@ -35,3 +35,17 @@ MANAN-cell
 
 ## GitHub Repository
 https://github.com/MANAN-cell/animal-species-recognition
+## Dataset
+
+The dataset contains five animal classes: Elephant, Horse, Lion, Cat, and Dog.
+
+- Training images: 13,496
+- Validation images: 1,500
+- Total images: 14,996
+- Image size: 224 × 224 pixels
+
+### Download Dataset
+
+[Download Animal Dataset (Google Drive)](https://drive.google.com/file/d/1koV77n6m5LJbiRB0703kHrNu9ULsqT6h/view?usp=sharing)
+
+The dataset ZIP file contains the training and validation images organized into class folders.
