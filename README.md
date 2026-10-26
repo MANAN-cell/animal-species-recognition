@@ -1,51 +1,61 @@
-# Animal Species Recognition and Classification System
+# Animal Species Recognition Using Deep Learning
 
 ## Project Overview
-This Deep Learning project identifies and classifies five animal species from uploaded images using a trained MobileNetV2 model.
+Animal Species Recognition is a deep learning project that classifies animal images into five categories: Cat, Dog, Elephant, Horse, and Lion. The project uses a trained image classification model and provides a web interface for testing predictions.
 
-## Supported Animals
+## Supported Classes
 - Cat
 - Dog
 - Elephant
 - Horse
 - Lion
 
-## Technologies Used
-- Python
-- Deep Learning
-- TensorFlow / Keras
-- MobileNetV2
-- HTML, CSS and JavaScript
+## Dataset
+The dataset contains approximately 13,496 training images and 1,500 validation images, with 300 validation images per class.
+
+The dataset is organized into training and validation folders. The complete dataset is available separately due to its large size.
 
 ## Model Details
-- Model architecture: MobileNetV2 (Transfer Learning)
-- Input image size: 224 × 224 pixels
+- Model: MobileNetV2-based image classifier
+- Input image size: 224 × 224
 - Number of classes: 5
-- Model files: `animal_species_model.tflite`
+- Validation accuracy: 96.80%
+- Saved model formats: Keras (`.keras`) and TensorFlow Lite (`.tflite`)
 
 ## Project Files
-- `index.html` — Web interface for uploading animal images.
-- `animal_species_model.tflite` — Trained model for animal classification.
+- `train_model.py` — model training code
+- `app.py` — application/API code
+- `index.html` — web interface
+- `requirements.txt` — Python dependencies
+- `animal_species_model.tflite` — trained TensorFlow Lite model
 
-## Project Status
-The web interface and trained model have been uploaded. Browser-based prediction integration and deployment are still in progress.
+## Live Demo
+Website: https://animal-species-recognition-ten.vercel.app/
+
+Prediction API: https://manan6726.pythonanywhere.com/predict
+
+## Source Code
+GitHub Repository: https://github.com/MANAN-cell/animal-species-recognition
+
+## Project Report
+The project report documents the problem statement, dataset, methodology, model architecture, evaluation results, deployment, limitations, and future improvements.
+
+## How to Run Locally
+1. Clone this repository.
+2. Install the required dependencies listed in `requirements.txt`.
+3. Run the application using the instructions supported by the application code.
+4. Open the web interface and test an animal image.
+
+## Evaluation
+The model achieved 96.80% validation accuracy on the validation dataset. Actual performance may vary on unseen images.
+
+## Future Improvements
+- Add more animal categories.
+- Improve performance on difficult or unfamiliar images.
+- Expand model evaluation using an independent test dataset.
+- Improve the web interface and documentation.
 
 ## Author
-MANAN-cell
-
-## GitHub Repository
-https://github.com/MANAN-cell/animal-species-recognition
-## Dataset
-
-The dataset contains five animal classes: Elephant, Horse, Lion, Cat, and Dog.
-
-- Training images: 13,496
-- Validation images: 1,500
-- Total images: 14,996
-- Image size: 224 × 224 pixels
-
-### Download Dataset
-
-[Download Animal Dataset (Google Drive)](https://drive.google.com/file/d/1koV77n6m5LJbiRB0703kHrNu9ULsqT6h/view?usp=sharing)
-
-The dataset ZIP file contains the training and validation images organized into class folders.
+Abdul Manan  
+BS Computer Science  
+Superior Gold Campus, Lahore
