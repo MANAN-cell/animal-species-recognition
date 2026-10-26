@@ -67,6 +67,7 @@
       background: #ecfdf5;
       border-radius: 12px;
       line-height: 1.8;
+      overflow-wrap: anywhere;
     }
     footer { text-align: center; color: #64748b; padding: 20px; }
   </style>
@@ -89,20 +90,35 @@
       </div>
 
       <button id="predictButton" disabled>Predict Animal</button>
-      <div id="result" role="status"></div>
+      <div id="result" role="status" aria-live="polite"></div>
     </section>
   </main>
 
   <footer>Animal Species Recognition Project</footer>
 
   <script>
+    const API_URL = "https://manan6726.pythonanywhere.com/predict";
+
     const input = document.getElementById("imageInput");
     const preview = document.getElementById("preview");
     const button = document.getElementById("predictButton");
+    const result = document.getElementById("result");
 
     input.addEventListener("change", () => {
       const file = input.files[0];
+
+      result.style.display = "none";
+      result.textContent = "";
+
       if (!file) {
+        preview.style.display = "none";
+        button.disabled = true;
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image.");
+        input.value = "";
         preview.style.display = "none";
         button.disabled = true;
         return;
@@ -111,11 +127,55 @@
       preview.src = URL.createObjectURL(file);
       preview.style.display = "block";
       button.disabled = false;
-      document.getElementById("result").style.display = "none";
     });
 
-    button.addEventListener("click", () => {
-      alert("Website design is ready. AI prediction will be connected in the next step.");
+    button.addEventListener("click", async () => {
+      const file = input.files[0];
+      if (!file) return;
+
+      button.disabled = true;
+      button.textContent = "Predicting...";
+      result.style.display = "block";
+      result.textContent = "AI model is analyzing your image. Please wait...";
+
+      try {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Prediction failed.");
+        }
+
+        result.replaceChildren();
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Prediction Result";
+
+        const animal = document.createElement("p");
+        animal.textContent = "Animal: " + data.animal;
+
+        const category = document.createElement("p");
+        category.textContent = "Category: " + data.category;
+
+        const confidence = document.createElement("p");
+        confidence.textContent = "Confidence: " + data.confidence + "%";
+
+        result.append(heading, animal, category, confidence);
+      } catch (error) {
+        result.textContent =
+          "Could not predict the image. Please try again. Details: " +
+          error.message;
+      } finally {
+        button.disabled = false;
+        button.textContent = "Predict Animal";
+      }
     });
   </script>
 </body>
