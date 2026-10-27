@@ -15,6 +15,15 @@ The dataset contains approximately 13,496 training images and 1,500 validation i
 
 The dataset is organized into training and validation folders. The complete dataset is available separately due to its large size.
 
+Download the complete dataset here:
+
+[Download Animal Dataset (ZIP)](https://drive.google.com/file/d/1koV77n6m5LJbiRB0703kHrNu9ULsqT6h/view?usp=sharing)
+
+- **Training images:** 13,496
+- **Validation images:** 1,500
+- **Classes:** Cat, Dog, Elephant, Horse, Lion
+- **Image size:** 224 × 224 pixels
+
 ## Model Details
 - Model: MobileNetV2-based image classifier
 - Input image size: 224 × 224
