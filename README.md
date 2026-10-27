@@ -24,6 +24,45 @@ Download the complete dataset here:
 - **Classes:** Cat, Dog, Elephant, Horse, Lion
 - **Image size:** 224 × 224 pixels
 
+## How to Train the Model
+
+### 1. Download the Dataset
+Download the dataset ZIP file from the Google Drive link above and extract it.
+
+### 2. Arrange the Dataset
+Make sure the extracted folders follow this structure:
+
+```text
+Animal_Dataset/
+└── Animal/
+    ├── train/
+    │   ├── cat/
+    │   ├── dog/
+    │   ├── ELEPHANT/
+    │   ├── HORSE/
+    │   └── LION/
+    └── val/
+        ├── cat/
+        ├── dog/
+        ├── ELEPHANT/
+        ├── HORSE/
+        └── LION/
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install tensorflow
+```
+
+### 4. Run Training
+
+```bash
+python train_model.py
+```
+
+**Note:** The training script saves the trained model and class names inside the `models/` folder.
+
 ## Model Details
 - Model: MobileNetV2-based image classifier
 - Input image size: 224 × 224
