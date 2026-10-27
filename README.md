@@ -52,7 +52,7 @@ Animal_Dataset/
 ### 3. Install Dependencies
 
 ```bash
-pip install tensorflow
+pip install -r requirements.txt
 ```
 
 ### 4. Run Training
