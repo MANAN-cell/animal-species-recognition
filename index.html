@@ -1,537 +1,171 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Animal Species Recognition | AI Project</title>
-
-  <meta name="description" content="An AI-powered deep learning project that recognizes cats, dogs, elephants, horses, and lions from images.">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172033;
-      line-height: 1.6;
-    }
-
-    a {
-      overflow-wrap: anywhere;
-    }
-
-    header {
-      background: linear-gradient(135deg, #12372a, #166534);
-      color: white;
-      text-align: center;
-      padding: 45px 18px;
-    }
-
-    header h1 {
-      margin: 0 0 10px;
-      font-size: clamp(28px, 5vw, 42px);
-    }
-
-    header p {
-      margin: 0;
-      color: #d1fae5;
-      font-size: 17px;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 5px 13px;
-      border: 1px solid #a7f3d0;
-      border-radius: 20px;
-      font-size: 13px;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 16px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 26px;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 30px #0f172a12;
-    }
-
-    h2 {
-      color: #14532d;
-      margin-top: 0;
-    }
-
-    h3 {
-      color: #166534;
-      margin-top: 24px;
-    }
-
-    .upload {
-      border: 2px dashed #94a3b8;
-      border-radius: 12px;
-      padding: 25px 15px;
-      text-align: center;
-      background: #f8fafc;
-    }
-
-    input[type="file"] {
-      display: block;
-      max-width: 100%;
-      margin: 15px auto 0;
-    }
-
-    #preview {
-      display: none;
-      width: 100%;
-      max-height: 350px;
-      object-fit: contain;
-      margin-top: 20px;
-      border-radius: 12px;
-    }
-
-    button,
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 9px;
-      background: #166534;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    #predictButton {
-      width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .btn:hover,
-    button:not(:disabled):hover {
-      background: #14532d;
-    }
-
-    #result {
-      display: none;
-      margin-top: 22px;
-      padding: 18px;
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
-      overflow-wrap: anywhere;
-    }
-
-    #result h3 {
-      margin-top: 0;
-    }
-
-    .resource-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .resource-links a {
-      display: inline-block;
-      padding: 11px 16px;
-      background: #166534;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .resource-links a:hover {
-      background: #14532d;
-    }
-
-    .animal-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 0;
-      list-style: none;
-    }
-
-    .animal-list li {
-      padding: 8px 13px;
-      background: #dcfce7;
-      color: #14532d;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .info-box {
-      padding: 17px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-    }
-
-    .info-box strong {
-      display: block;
-      color: #166534;
-      font-size: 22px;
-    }
-
-    .note {
-      padding: 12px;
-      background: #f8fafc;
-      border-left: 4px solid #166534;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      color: #cbd5e1;
-      background: #12372a;
-      padding: 24px 16px;
-      margin-top: 35px;
-    }
-
-    footer p {
-      margin: 5px 0;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 32px 15px;
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .resource-links {
-        flex-direction: column;
-      }
-
-      .resource-links a {
-        text-align: center;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fauna AI — Animal Species Recognition</title>
+<meta name="description" content="An AI-powered animal species recognition platform for cats, dogs, elephants, horses and lions.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--bg:#080d18;--panel:#101a2b;--panel2:#131f33;--line:rgba(173,196,235,.13);--text:#eef4ff;--muted:#91a1bb;--cyan:#5ee7df;--violet:#9b8cff;--green:#9df5c5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#18264a 0,transparent 38%),radial-gradient(ellipse at 90% 20%,#172d3a 0,transparent 32%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:700;font-size:20px;letter-spacing:-.5px}.brandmark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#09111d;font-size:21px}
+.navlinks{display:flex;gap:28px;color:var(--muted);font-size:13px}.navlinks a:hover{color:var(--cyan)}
+.pill{border:1px solid rgba(94,231,223,.3);color:var(--cyan);border-radius:30px;padding:7px 12px;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.hero{padding:66px 0 38px;display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+h1,h2,h3{font-family:'Space Grotesk';line-height:1.12;letter-spacing:-1px}h1{font-size:clamp(38px,5.6vw,66px);margin:16px 0}h1 span{background:linear-gradient(90deg,var(--cyan),#b1a5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:520px;font-size:16px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:12px;padding:13px 19px;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}.primary{background:linear-gradient(100deg,var(--cyan),#a6a0ff);color:#09111d}.secondary{background:#18243a;border:1px solid var(--line);color:var(--text)}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.hero-art{min-height:300px;position:relative;display:grid;place-items:center}.orb{width:min(330px,75vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#294d67,#18294a 45%,#11192d 72%);border:1px solid rgba(94,231,223,.25);box-shadow:0 0 80px #5ee7df18,inset 0 0 50px #9b8cff19;display:grid;place-items:center;font-size:120px;position:relative}.orb:before,.orb:after{content:"";position:absolute;inset:-20px;border:1px solid rgba(155,140,255,.22);border-radius:50%;transform:rotate(-25deg) scaleY(.38)}.orb:after{transform:rotate(55deg) scaleY(.38);border-color:rgba(94,231,223,.25)}.float-tag{position:absolute;background:#17243a;border:1px solid var(--line);padding:10px 14px;border-radius:12px;color:#dce8ff;font-size:12px;box-shadow:0 12px 30px #0005}.tag1{top:35px;right:0}.tag2{bottom:30px;left:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 48px}.stat{padding:17px 20px;border:1px solid var(--line);border-radius:16px;background:#101a2b9c}.stat strong{display:block;font:700 24px 'Space Grotesk';color:var(--cyan)}.stat span{color:var(--muted);font-size:12px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:52px 0 20px}.section-head h2{font-size:30px;margin:8px 0}.section-head p{margin:0;color:var(--muted);font-size:13px}
+.workspace{display:grid;grid-template-columns:1.08fr .92fr;gap:18px}.panel{background:linear-gradient(145deg,#121e31,#0e1727);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 20px 60px #0002}.panel h3{font-size:19px;margin:0 0 6px}.sub{color:var(--muted);font-size:13px;margin:0 0 20px}
+.dropzone{min-height:245px;border:1.5px dashed #435779;border-radius:16px;background:linear-gradient(135deg,#16243a,#111b2d);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;cursor:pointer;transition:.2s}.dropzone.drag{border-color:var(--cyan);background:#18303a}.upload-icon{width:56px;height:56px;border-radius:18px;background:#20364a;display:grid;place-items:center;font-size:26px;margin-bottom:12px}.dropzone strong{font-size:15px}.dropzone small{color:var(--muted);margin-top:5px}.dropzone input{display:none}
+#preview{display:none;max-width:100%;max-height:280px;object-fit:contain;border-radius:12px;margin-top:16px;border:1px solid var(--line)}
+.file-meta{display:none;color:var(--muted);font-size:12px;margin-top:9px;overflow-wrap:anywhere}
+#predictButton{width:100%;margin-top:16px}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.result-empty{min-height:245px;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);background:#0b1423}.result-empty .scan{font-size:48px;margin-bottom:12px;opacity:.8}
+#result{display:none;border:1px solid rgba(94,231,223,.24);background:linear-gradient(145deg,#142b35,#121b31);border-radius:16px;padding:20px;overflow-wrap:anywhere}
+.result-kicker{font-size:11px;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}.animal-name{font:700 30px 'Space Grotesk';margin:5px 0 0}.category{display:inline-block;margin:8px 0 18px;padding:5px 10px;border-radius:20px;background:#243a4a;color:var(--green);font-size:12px}
+.conf-row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}.meter{height:9px;background:#263248;border-radius:20px;overflow:hidden;margin:8px 0 16px}.meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));border-radius:20px;transition:width .6s}
+#resultMessage{color:var(--muted);font-size:12px;margin-top:12px}
+.animals{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.animal-card{padding:18px 12px;text-align:center;border-radius:16px;background:#111c2d;border:1px solid var(--line)}.animal-card .emoji{font-size:32px}.animal-card strong{display:block;margin-top:8px;font-size:13px}.animal-card span{color:var(--muted);font-size:11px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 50px}.info-card{padding:20px;border:1px solid var(--line);border-radius:16px;background:#101a2b}.info-card b{display:block;color:var(--cyan);font:700 20px 'Space Grotesk';margin-bottom:5px}.info-card span{color:var(--muted);font-size:12px}
+.resources{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 55px}.resource{padding:11px 15px;border:1px solid var(--line);background:#142139;border-radius:10px;font-size:13px;font-weight:600}.resource:hover{border-color:var(--cyan)}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:12px}.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:45px;gap:8px}.hero-art{min-height:260px}.orb{width:235px;font-size:90px}.workspace{grid-template-columns:1fr}.animals{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr}.navlinks{gap:12px}.navlinks a:nth-child(3){display:none}.section-head{align-items:start;flex-direction:column}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:20px}}
+</style>
 </head>
-
 <body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="#"><span class="brandmark">✦</span> FAUNA<span style="color:var(--cyan)">AI</span></a>
+  <div class="navlinks"><a href="#recognize">Try AI</a><a href="#animals">Animals</a><a href="#about">About</a></div>
+  <span class="pill">AI powered · Live demo</span>
+</nav>
 
-  <header>
-    <span class="hero-tag">Deep Learning Project</span>
-    <h1>Animal Species Recognition</h1>
-    <p>AI-powered animal image classification</p>
-  </header>
+<section class="hero">
+  <div>
+    <div class="eyebrow">Deep learning · Computer vision</div>
+    <h1>Discover the animal.<br><span>Let AI identify it.</span></h1>
+    <p>Upload an image and watch our trained deep learning model recognize one of five animal species in seconds.</p>
+    <div class="hero-actions"><a class="btn primary" href="#recognize">Start identifying&nbsp; ↗</a><a class="btn secondary" href="#about">Explore the project</a></div>
+  </div>
+  <div class="hero-art"><div class="orb">🦁</div><div class="float-tag tag1">✦ &nbsp; Intelligent image analysis</div><div class="float-tag tag2">◉ &nbsp; 5 animal classes</div></div>
+</section>
 
-  <main>
+<div class="stats">
+  <div class="stat"><strong>96.80%</strong><span>Validation accuracy</span></div>
+  <div class="stat"><strong>5</strong><span>Recognized species</span></div>
+  <div class="stat"><strong>14,996</strong><span>Training + validation images</span></div>
+</div>
 
-    <!-- AI Prediction Demo -->
-    <section class="card" id="demo">
-      <h2>Identify an Animal</h2>
-      <p>
-        Upload an image and let the trained AI model predict whether
-        it contains a cat, dog, elephant, horse, or lion.
-      </p>
-
-      <div class="upload">
-        <strong>Choose an animal image</strong>
-        <input
-          type="file"
-          id="imageInput"
-          accept="image/*"
-          aria-label="Choose an animal image"
-        >
-        <img id="preview" alt="Selected animal image preview">
-      </div>
-
-      <button id="predictButton" disabled>Predict Animal</button>
-
+<section id="recognize">
+  <div class="section-head"><div><div class="eyebrow">Try the model</div><h2>Animal recognition studio</h2><p>Choose a clear animal photo to get an AI prediction.</p></div><span class="pill">Model ready</span></div>
+  <div class="workspace">
+    <div class="panel">
+      <h3>Upload your image</h3><p class="sub">JPG, PNG or WEBP · Drag and drop supported</p>
+      <label class="dropzone" id="dropzone" for="imageInput">
+        <span class="upload-icon">⇧</span><strong>Drop your animal image here</strong><small>or click to browse files</small>
+        <input type="file" id="imageInput" accept="image/*">
+        <img id="preview" alt="Selected animal preview">
+      </label>
+      <div class="file-meta" id="fileMeta"></div>
+      <button class="btn primary" id="predictButton" disabled>✦ &nbsp; Identify animal</button>
+    </div>
+    <div class="panel">
+      <h3>AI prediction</h3><p class="sub">Your recognition result will appear here.</p>
+      <div class="result-empty" id="emptyResult"><div class="scan">⌁</div><strong>Waiting for an image</strong><span style="font-size:12px;margin-top:5px">Upload an image and start analysis.</span></div>
       <div id="result" role="status" aria-live="polite"></div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Project Introduction -->
-    <section class="card" id="about">
-      <h2>About This Project</h2>
+<section id="animals">
+  <div class="section-head"><div><div class="eyebrow">Supported classes</div><h2>Five animals. One AI model.</h2><p>The classifier is trained to recognize these five animal classes.</p></div></div>
+  <div class="animals">
+    <div class="animal-card"><div class="emoji">🐱</div><strong>Cat</strong><span>Pet</span></div>
+    <div class="animal-card"><div class="emoji">🐶</div><strong>Dog</strong><span>Pet</span></div>
+    <div class="animal-card"><div class="emoji">🐘</div><strong>Elephant</strong><span>Wild animal</span></div>
+    <div class="animal-card"><div class="emoji">🐴</div><strong>Horse</strong><span>Domestic animal</span></div>
+    <div class="animal-card"><div class="emoji">🦁</div><strong>Lion</strong><span>Wild animal</span></div>
+  </div>
+</section>
 
-      <p>
-        Animal Species Recognition is a deep learning project that
-        classifies animal images into five categories using a
-        MobileNetV2-based image classification model.
-      </p>
+<section id="about">
+  <div class="section-head"><div><div class="eyebrow">Behind the intelligence</div><h2>Built with deep learning</h2><p>A compact image classification project using transfer learning.</p></div></div>
+  <div class="info-grid">
+    <div class="info-card"><b>MobileNetV2</b><span>Pre-trained CNN architecture</span></div>
+    <div class="info-card"><b>TensorFlow</b><span>Deep learning framework</span></div>
+    <div class="info-card"><b>224 × 224</b><span>Input image resolution</span></div>
+    <div class="info-card"><b>13,496</b><span>Training images</span></div>
+    <div class="info-card"><b>1,500</b><span>Validation images</span></div>
+    <div class="info-card"><b>5 epochs</b><span>Training duration</span></div>
+  </div>
+  <div class="resources">
+    <a class="resource" href="https://drive.google.com/file/d/1koV77n6m5LJbiRB0703kHrNu9ULsqT6h/view?usp=sharing" target="_blank" rel="noopener">↓ Download dataset</a>
+    <a class="resource" href="https://github.com/MANAN-cell/animal-species-recognition" target="_blank" rel="noopener">↗ GitHub repository</a>
+    <a class="resource" href="https://github.com/MANAN-cell/animal-species-recognition/blob/main/Animal_Species_Recognition_Project_Report.docx" target="_blank" rel="noopener">↗ Project report</a>
+  </div>
+  <p style="color:var(--muted);font-size:12px;max-width:800px">Note: 96.80% is the measured validation accuracy on the held-out validation dataset. Confidence scores are model outputs and do not guarantee prediction reliability for every new image.</p>
+</section>
+<footer><div class="foot"><span>© 2026 Fauna AI · Animal Species Recognition</span><span>Student Deep Learning Project · Five animal classes</span></div></footer>
+</div>
 
-      <h3>Project Objectives</h3>
-      <ul>
-        <li>Recognize animals from uploaded images.</li>
-        <li>Apply deep learning to image classification.</li>
-        <li>Display the predicted animal, category, and confidence score.</li>
-        <li>Provide a web interface for trying the trained model.</li>
-      </ul>
+<script>
+const API_URL = "https://manan6726.pythonanywhere.com/predict";
+const input = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const button = document.getElementById("predictButton");
+const result = document.getElementById("result");
+const emptyResult = document.getElementById("emptyResult");
+const dropzone = document.getElementById("dropzone");
+const fileMeta = document.getElementById("fileMeta");
+let previewUrl = null;
 
-      <h3>Supported Animals</h3>
-      <ul class="animal-list">
-        <li>Cat</li>
-        <li>Dog</li>
-        <li>Elephant</li>
-        <li>Horse</li>
-        <li>Lion</li>
-      </ul>
-    </section>
-
-    <!-- Dataset Information -->
-    <section class="card" id="dataset">
-      <h2>Dataset Information</h2>
-
-      <p>
-        The dataset contains images organized into five animal classes
-        for model training and validation.
-      </p>
-
-      <div class="info-grid">
-        <div class="info-box">
-          <strong>13,496</strong>
-          Training images
-        </div>
-
-        <div class="info-box">
-          <strong>1,500</strong>
-          Validation images
-        </div>
-
-        <div class="info-box">
-          <strong>300</strong>
-          Validation images per class
-        </div>
-
-        <div class="info-box">
-          <strong>224 × 224</strong>
-          Model input image size
-        </div>
-      </div>
-
-      <div class="resource-links">
-        <a
-          href="https://drive.google.com/file/d/1koV77n6m5LJbiRB0703kHrNu9ULsqT6h/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Download Animal Dataset (ZIP)
-        </a>
-      </div>
-
-      <p class="note">
-        The dataset is hosted on Google Drive. Access depends on the
-        sharing permissions of the file.
-      </p>
-    </section>
-
-    <!-- Model Information -->
-    <section class="card" id="model">
-      <h2>Model Information</h2>
-
-      <p><strong>Architecture:</strong> MobileNetV2-based CNN classifier</p>
-      <p><strong>Framework:</strong> TensorFlow / Keras</p>
-      <p><strong>Input size:</strong> 224 × 224 pixels</p>
-      <p><strong>Number of classes:</strong> 5</p>
-      <p><strong>Training epochs:</strong> 5</p>
-      <p><strong>Model formats:</strong> Keras (.keras) and TensorFlow Lite (.tflite)</p>
-
-      <div class="info-grid">
-        <div class="info-box">
-          <strong>96.80%</strong>
-          Validation accuracy
-        </div>
-      </div>
-
-      <p class="note">
-        The reported accuracy is measured on the validation dataset.
-        It does not guarantee the same accuracy on every new image.
-        Confidence scores are model outputs and may not always represent
-        true prediction reliability.
-      </p>
-
-      <h3>Source Code and Model Files</h3>
-      <p>
-        Visit the public GitHub repository to access the project source
-        code, model files, and setup information.
-      </p>
-
-      <div class="resource-links">
-        <a
-          href="https://github.com/MANAN-cell/animal-species-recognition"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View GitHub Repository
-        </a>
-      </div>
-    </section>
-
-    <!-- Project Resources -->
-    <section class="card" id="resources">
-      <h2>Project Resources</h2>
-
-      <p>Access the project report and related resources below.</p>
-
-      <div class="resource-links">
-        <a
-          href="https://github.com/MANAN-cell/animal-species-recognition/blob/main/Animal_Species_Recognition_Project_Report.docx"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View / Download Project Report
-        </a>
-
-        <a
-          href="https://github.com/MANAN-cell/animal-species-recognition"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Source Code on GitHub
-        </a>
-      </div>
-
-      <p class="note">
-        Presentation and video links can be added here after the
-        presentation and voiceover have been completed.
-      </p>
-    </section>
-
-  </main>
-
-  <footer>
-    <p><strong>Animal Species Recognition</strong></p>
-    <p>Deep Learning Project | Five Animal Classes</p>
-  </footer>
-
-  <script>
-    const API_URL = "https://manan6726.pythonanywhere.com/predict";
-
-    const input = document.getElementById("imageInput");
-    const preview = document.getElementById("preview");
-    const button = document.getElementById("predictButton");
-    const result = document.getElementById("result");
-
-    let previewUrl = null;
-
-    input.addEventListener("change", () => {
-      const file = input.files[0];
-
-      result.style.display = "none";
-      result.textContent = "";
-
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl);
-        previewUrl = null;
-      }
-
-      if (!file) {
-        preview.style.display = "none";
-        preview.removeAttribute("src");
-        button.disabled = true;
-        return;
-      }
-
-      if (!file.type.startsWith("image/")) {
-        alert("Please select a valid image file.");
-        input.value = "";
-        preview.style.display = "none";
-        button.disabled = true;
-        return;
-      }
-
-      previewUrl = URL.createObjectURL(file);
-      preview.src = previewUrl;
-      preview.style.display = "block";
-      button.disabled = false;
-    });
-
-    button.addEventListener("click", async () => {
-      const file = input.files[0];
-
-      if (!file) {
-        return;
-      }
-
-      button.disabled = true;
-      button.textContent = "Predicting...";
-
-      result.style.display = "block";
-      result.textContent =
-        "The AI model is analyzing your image. Please wait...";
-
-      try {
-        const formData = new FormData();
-        formData.append("image", file);
-
-        const response = await fetch(API_URL, {
-          method: "POST",
-          body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Prediction failed.");
-        }
-
-        result.replaceChildren();
-
-        const heading = document.createElement("h3");
-        heading.textContent = "Prediction Result";
-
-        const animal = document.createElement("p");
-        animal.textContent = "Animal: " + data.animal;
-
-        const category = document.createElement("p");
-        category.textContent = "Category: " + data.category;
-
-        const confidence = document.createElement("p");
-        confidence.textContent =
-          "Confidence: " + data.confidence + "%";
-
-        result.append(heading, animal, category, confidence);
-
-      } catch (error) {
-        result.textContent =
-          "Could not predict the image. Please try again. Details: " +
-          error.message;
-      } finally {
-        button.disabled = false;
-        button.textContent = "Predict Animal";
-      }
-    });
-  </script>
-
+function useFile(file){
+  result.style.display="none"; result.replaceChildren(); emptyResult.style.display="flex";
+  if(previewUrl){URL.revokeObjectURL(previewUrl);previewUrl=null;}
+  if(!file){preview.style.display="none";preview.removeAttribute("src");fileMeta.style.display="none";button.disabled=true;return;}
+  if(!file.type.startsWith("image/")){alert("Please select a valid image file.");input.value="";useFile(null);return;}
+  previewUrl=URL.createObjectURL(file);preview.src=previewUrl;preview.style.display="block";
+  fileMeta.textContent=file.name+" · "+(file.size/1024/1024).toFixed(2)+" MB";fileMeta.style.display="block";
+  button.disabled=false;
+}
+input.addEventListener("change",()=>useFile(input.files[0]));
+["dragenter","dragover"].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.add("drag");}));
+["dragleave","drop"].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.remove("drag");}));
+dropzone.addEventListener("drop",e=>{const file=e.dataTransfer.files[0];if(file){input.files=e.dataTransfer.files;useFile(file);}});
+button.addEventListener("click",async()=>{
+  const file=input.files[0];if(!file)return;
+  button.disabled=true;button.textContent="◌  Analyzing image...";
+  emptyResult.style.display="none";result.style.display="block";result.textContent="AI is analyzing your image. Please wait...";
+  try{
+    const formData=new FormData();formData.append("image",file);
+    const response=await fetch(API_URL,{method:"POST",body:formData});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||"Prediction failed.");
+    const confidence=Number(data.confidence);
+    const safeConfidence=Number.isFinite(confidence)?Math.max(0,Math.min(100,confidence)):0;
+    result.replaceChildren();
+    const kicker=document.createElement("div");kicker.className="result-kicker";kicker.textContent="✦  Recognition complete";
+    const animal=document.createElement("div");animal.className="animal-name";animal.textContent=data.animal||"Unknown";
+    const category=document.createElement("span");category.className="category";category.textContent=data.category||"Animal";
+    const row=document.createElement("div");row.className="conf-row";
+    const label=document.createElement("span");label.textContent="Model confidence";
+    const value=document.createElement("strong");value.style.color="var(--cyan)";value.textContent=safeConfidence.toFixed(2)+"%";
+    row.append(label,value);
+    const meter=document.createElement("div");meter.className="meter";
+    const fill=document.createElement("span");fill.style.width=safeConfidence+"%";meter.append(fill);
+    const msg=document.createElement("div");msg.id="resultMessage";msg.textContent="Prediction generated by the trained MobileNetV2 model.";
+    result.append(kicker,animal,category,row,meter,msg);
+  }catch(error){
+    result.textContent="Could not predict this image. Please try again. Details: "+error.message;
+  }finally{button.disabled=false;button.textContent="✦  Identify animal";}
+});
+</script>
 </body>
 </html>
